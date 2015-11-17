@@ -5,6 +5,8 @@ import sklearn.feature_extraction.text
 import sklearn.grid_search
 import sklearn.linear_model
 import sklearn.ensemble
+import os
+
 
 import input_output as io
 import feature_extraction as fe
@@ -138,7 +140,13 @@ def linear_model(train, target, test, text_train_tfidf, text_test_tfidf):
 
     return result
 
+def make_dirs(dir_names):
+    for name in dir_names:
+        if not os.path.exists(name):
+            os.makedirs(name)
 
+dir_names = ["input", "output", "w2v", "metafeatures"]
+make_dirs(dir_names)
 
 train, target, test = io.load_data()
 text_train_tfidf, text_test_tfidf = get_tfidf(train, test)
